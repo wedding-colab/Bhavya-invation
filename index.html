@@ -1,639 +1,909 @@
 <!DOCTYPE html>
-<html lang="te">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Bhavya Sri | Half Saree Ceremony | Langa Voni Invitation</title>
-    <!-- Google Fonts: Elegant & Traditional -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Samskara | Bhavya Sri – Ritu Kala Samskara</title>
+  <meta name="description" content="Join us in celebrating the Ritu Kala Samskara (Half Saree Ceremony) of Bhavya Sri." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #1a0b04;
-            color: #fdf6ec;
-            overflow-x: hidden;
-        }
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Inter',sans-serif;
+      background:#f7f1e8;
+      overflow-x:hidden;
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    .font-serif { font-family:'Playfair Display',serif; }
 
-        /* Canvas 3D background (temple-esque) */
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
+    /* GOLD GRADIENT */
+    .gold-gradient {
+      background:linear-gradient(180deg,#fff8cf 0%,#f8dd7f 30%,#e1b84c 70%,#b8860b 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
 
-        /* Main scroll content */
-        .content {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
-            backdrop-filter: blur(2px);
-        }
+    .glass {
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,0.12);
+    }
 
-        /* Invitation Card with Luxury Border */
-        .invitation-card {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
+    .premium-shadow {
+      box-shadow:0 10px 40px rgba(0,0,0,0.35),0 5px 20px rgba(0,0,0,0.2);
+    }
 
-        .card-inner {
-            background: rgba(26, 15, 8, 0.72);
-            backdrop-filter: blur(12px);
-            border-radius: 68px;
-            border: 1px solid rgba(212, 175, 55, 0.7);
-            box-shadow: 0 35px 55px rgba(0,0,0,0.5), 0 0 0 3px rgba(160, 110, 30, 0.3) inset;
-            padding: 2.5rem;
-            transition: transform 0.35s ease;
-        }
+    .gold-line {
+      width:120px; height:1px;
+      background:linear-gradient(to right,transparent,rgba(212,175,55,0.95),transparent);
+    }
 
-        .card-inner:hover {
-            transform: translateY(-6px);
-        }
+    /* FADE-UP ANIMATION */
+    .fade-up { opacity:0; transform:translateY(50px); transition:opacity 1s ease,transform 1s ease; }
+    .fade-up.show { opacity:1; transform:translateY(0); }
 
-        /* Temple Motifs */
-        .temple-mantap {
-            text-align: center;
-            font-size: 2.8rem;
-            letter-spacing: 12px;
-            color: #e6ba6b;
-            margin-bottom: 0.5rem;
-        }
+    #heroParallax { will-change:transform; }
 
-        /* Lang switch */
-        .lang-switch {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+    .silk-bg {
+      background:
+        radial-gradient(circle at top left,rgba(212,175,55,0.08),transparent 25%),
+        radial-gradient(circle at bottom right,rgba(212,175,55,0.08),transparent 25%);
+    }
 
-        .lang-btn {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid #c9a34b;
-            padding: 6px 18px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            color: #ffecbc;
-            transition: all 0.2s;
-            font-size: 0.85rem;
-        }
+    .btn-gold { background:linear-gradient(135deg,#d4af37,#b8860b); }
+    .btn-red  { background:linear-gradient(135deg,#b22b1d,#d63e2b); }
+    .btn-hover { transition:all .35s ease; }
+    .btn-hover:hover { transform:translateY(-3px) scale(1.02); }
 
-        .lang-btn.active {
-            background: #c78f3a;
-            color: #1f1307;
-            border-color: #f5d37a;
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-        }
+    ::-webkit-scrollbar { width:8px; }
+    ::-webkit-scrollbar-track { background:#20140b; }
+    ::-webkit-scrollbar-thumb { background:#caa13b; border-radius:20px; }
 
-        .lang-btn:hover:not(.active) {
-            background: #965d2a;
-            color: white;
-        }
+    /* ===== MOBILE FIXES ===== */
+    @media(max-width:640px) {
+      .hero-title {
+        font-size:clamp(52px, 16vw, 82px) !important;
+        line-height:0.88 !important;
+        letter-spacing:-1px !important;
+      }
+      .hero-desc { font-size:14px !important; line-height:1.8 !important; }
+      .shloka-text { font-size:12px !important; }
+      .ceremony-badge {
+        font-size:9px !important;
+        letter-spacing:0.1em !important;
+        padding:8px 12px !important;
+        white-space:normal !important;
+        text-align:center;
+        line-height:1.6;
+      }
+      .event-info-card {
+        flex-direction:column !important;
+        width:100% !important;
+        padding:16px !important;
+        gap:0 !important;
+        border-radius:20px !important;
+      }
+      .event-info-row {
+        width:100%;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:12px 0;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+      }
+      .event-info-row:last-child { border-bottom:none; padding-bottom:0; }
+      .event-info-row:first-child { padding-top:0; }
+      .event-info-icon { width:44px !important; height:44px !important; flex-shrink:0; }
+      .countdown-wrap {
+        display:grid !important;
+        grid-template-columns:1fr 1fr !important;
+        gap:10px !important;
+      }
+      .countdown-box { padding:12px 8px !important; min-width:0 !important; border-radius:14px !important; }
+      .cd-number { font-size:26px !important; }
+      .hero-btn { width:100% !important; justify-content:center !important; }
+      .section-heading { font-size:34px !important; }
+      .quote-text { font-size:17px !important; line-height:1.8 !important; margin-bottom:28px !important; }
+      .muhurtham-number { font-size:52px !important; }
+      .blessings-quote { font-size:17px !important; line-height:1.9 !important; }
+      .blessings-heading { font-size:34px !important; }
+      .no-gift-pill { flex-wrap:wrap; border-radius:16px !important; padding:12px 14px !important; }
+    }
+    @media(max-width:380px) {
+      .hero-title { font-size:clamp(42px, 13.5vw, 56px) !important; }
+      .cd-number { font-size:22px !important; }
+    }
 
-        .bilingual-section {
-            text-align: center;
-            margin: 15px 0;
-        }
+    /* LANGUAGE TOGGLE */
+    .lang-switch-btn { color:#7a5200; }
+    .active-lang {
+      background:linear-gradient(135deg,#7a5200,#b8860b);
+      color:white !important;
+      box-shadow:0 5px 15px rgba(0,0,0,0.18);
+    }
 
-        .telugu-text {
-            font-family: 'Poppins', 'Noto Sans Telugu', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: #fcd893;
-            letter-spacing: 1px;
-        }
+    /* DEFAULT (English active): show EN, hide TE */
+    body.lang-english .lang-te { display:none !important; }
+    body.lang-english .lang-en { display:inline !important; }
 
-        .english-text {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: #f8e0b0;
-        }
+    /* Telugu active: show TE, hide EN */
+    body.lang-telugu .lang-en { display:none !important; }
+    body.lang-telugu .lang-te { display:inline !important; }
 
-        .main-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fceabb, #e4b363);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 0.8rem 0;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-        }
+    /* DIVIDER ORNAMENT */
+    .ornament-divider {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      margin:16px 0;
+    }
+    .ornament-divider::before,.ornament-divider::after {
+      content:'';
+      flex:1;
+      max-width:80px;
+      height:1px;
+      background:linear-gradient(to right,transparent,rgba(212,175,55,0.7),transparent);
+    }
 
-        .gold-divider {
-            width: 140px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #e9bf6e, #b87d33, #e9bf6e, transparent);
-            margin: 25px auto;
-        }
+    /* COUNTDOWN */
+    .countdown-box {
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(248,221,127,0.25);
+      border-radius:20px;
+      padding:20px 28px;
+      text-align:center;
+      min-width:80px;
+    }
 
-        .name-highlight {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(145deg, #ffefc0, #f5bc70);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-family: 'Playfair Display', serif;
-        }
+    /* RITUAL TIMELINE */
+    .timeline-item { display:flex; gap:16px; align-items:flex-start; }
+    .timeline-dot { width:12px; height:12px; background:#f8dd7f; border-radius:50%; margin-top:6px; flex-shrink:0; }
+    .timeline-line { width:2px; background:rgba(248,221,127,0.2); flex-shrink:0; align-self:stretch; margin-left:5px; }
+  </style>
 
-        .parents-name {
-            font-size: 1.4rem;
-            font-weight: 500;
-            margin: 10px 0;
-            color: #ecd79b;
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold:'#d4af37', red:'#b22b1d', cream:'#f7f1e8', dark:'#18110c'
+          }
         }
-
-        .details-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 28px;
-            margin: 40px 0;
-        }
-
-        .detail-badge {
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(5px);
-            padding: 12px 28px;
-            border-radius: 60px;
-            border-left: 4px solid #e4b069;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1rem;
-        }
-
-        .location-link {
-            background: #b16a2c;
-            color: white;
-            padding: 12px 28px;
-            border-radius: 60px;
-            text-decoration: none;
-            font-weight: bold;
-            letter-spacing: 1px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.25s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .location-link:hover {
-            background: #d48a3b;
-            transform: scale(0.98);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.3);
-        }
-
-        .ritual-description {
-            background: rgba(40, 25, 12, 0.65);
-            border-radius: 48px;
-            padding: 1.5rem;
-            margin: 40px 0 20px;
-            border: 1px solid #dfb15c;
-            line-height: 1.5;
-        }
-
-        .footer-blessing {
-            text-align: center;
-            margin-top: 30px;
-            font-style: italic;
-            font-size: 0.9rem;
-            color: #e2ca91;
-        }
-
-        /* Contact info row - neat and professional */
-        .contact-row {
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 60px;
-            padding: 10px 20px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #ffefcf;
-        }
-
-        .contact-item a {
-            color: #ffdfa5;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .contact-item a:hover {
-            color: #e7b85e;
-            text-decoration: underline;
-        }
-
-        .btn-calendar {
-            background: #8b5a2b;
-            border: none;
-            padding: 8px 22px;
-            border-radius: 40px;
-            color: #ffefcf;
-            font-weight: 600;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .btn-calendar:hover {
-            background: #ae6f38;
-        }
-
-        /* Footer text color black */
-        .custom-footer {
-            text-align: center;
-            font-size: 0.7rem;
-            margin: 20px auto 30px;
-            opacity: 1;
-            color: #000000;
-            font-weight: 500;
-            background: rgba(255, 255, 230, 0.8);
-            display: inline-block;
-            padding: 6px 20px;
-            border-radius: 50px;
-            backdrop-filter: blur(2px);
-        }
-
-        @media (max-width: 750px) {
-            .card-inner { padding: 1.2rem; }
-            .main-heading { font-size: 2.2rem; }
-            .name-highlight { font-size: 1.8rem; }
-            .telugu-text { font-size: 1.2rem; }
-            .detail-badge { padding: 8px 16px; font-size: 0.75rem; }
-            .parents-name { font-size: 1rem; }
-            .location-link { padding: 8px 16px; font-size: 0.85rem; }
-            .contact-row { gap: 15px; font-size: 0.75rem; }
-        }
-    </style>
+      }
+    }
+  </script>
 </head>
-<body>
+<body class="lang-english">
 
-<div id="canvas-container"></div>
+<!-- ========== FIXED HEADER ========== -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/25 backdrop-blur-xl border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-<div class="content">
-    <div class="invitation-card">
-        <div class="card-inner">
-            <!-- Language Toggle -->
-            <div class="lang-switch">
-                <button id="teluguBtn" class="lang-btn active">📜 తెలుగు</button>
-                <button id="englishBtn" class="lang-btn">🇬🇧 English</button>
-            </div>
-
-            <div class="temple-mantap">🪔 𑁍 🪷 🌿</div>
-            
-            <!-- Telugu Block -->
-            <div id="teluguLangBlock">
-                <div class="bilingual-section">
-                    <div class="telugu-text">✨ శ్రీరాముల శరణము ✨</div>
-                    <div class="telugu-text" style="font-size:1.5rem;">శుభ సమయంలో</div>
-                    <div class="main-heading">లంగా ఓణి<br> &nbsp;| రితు కళా సంస్కారం |</div>
-                </div>
-                <div class="gold-divider"></div>
-                <div style="text-align:center;">
-                    <div class="parents-name">శ్రీ బొడ్డపు గోవింద & శ్రీమతి దేవి దంపతుల కుమార్తె</div>
-                    <div class="name-highlight">బొడ్డపు భవ్యశ్రీ</div>
-                    <div class="telugu-text" style="font-size:1rem; margin-top:6px;">(లంగా ధారణ వేడుకకు ఆహ్వానం)</div>
-                </div>
-                <div class="gold-divider"></div>
-                <div class="details-wrapper">
-                    <div class="detail-badge">📅 ఆదివారం, 2026 మే 17</div>
-                    <div class="detail-badge">🕛 మధ్యాహ్నం 12:00 గంటలకు</div>
-                    <div class="detail-badge">🏛️ సొంత్యం ZPHS గ్రౌండ్</div>
-                </div>
-                <div class="ritual-description" style="text-align: center;">
-                    💫 సాంప్రదాయ పసుపు కుంకుమ, మంగళ హారతి, నృత్య సంగీతంతో నిండిన వేడుక.<br>
-                    మా కుమార్తె భవ్యశ్రీ లంగా వోని ధరించి, స్త్రీత్వం వైపు అడుగు పెడుతుంది.<br>
-                    మీ ఆశీస్సులు, ఆప్యాయతలతో ఈ సందర్భాన్ని మరింత శుభప్రదంగా చేయండి.
-                </div>
-                <div style="display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 10px 0;">
-                    <button id="mapTriggerTelugu" class="location-link">📍 దారి వివరాలు (నా స్థానం నుండి) →</button>
-                    <button class="btn-calendar" id="calendarTeluguBtn">📅 క్యాలెండర్‌కు జోడించు</button>
-                </div>
-                <!-- Contact Info for Telugu -->
-                <div class="contact-row">
-                    <div class="contact-item">📞 బొడ్డపు గోవింద: <a href="tel:+919876543210">+91 98765 43210</a></div>
-                    <div class="contact-item">📧 <a href="mailto:boddapu.family@example.com">boddapu.family@example.com</a></div>
-                </div>
-                <div class="footer-blessing">
-                    🙏 భోజన, విందు అనంతరం .. మీ ప్రసన్నతకు ధన్యవాదాలు 🙏
-                </div>
-            </div>
-
-            <!-- ENGLISH block (updated) -->
-            <div id="englishLangBlock" style="display:none;">
-                <div class="bilingual-section">
-                    <div class="english-text">✨ In the Divine Presence ✨</div>
-                    <div class="english-text" style="font-size:1.2rem; font-weight:500;">With joyous hearts</div>
-                    <div class="main-heading">Half Saree Ceremony<br> &nbsp;| Coming of Age |</div>
-                </div>
-                <div class="gold-divider"></div>
-                <div style="text-align:center;">
-                    <div class="parents-name">Sri Boddapu Govinda & Smt. Devi</div>
-                    <div class="name-highlight">Boddapu Bhavya Sri</div>
-                    <div class="english-text" style="font-size:1rem; margin-top:6px;">(Invitation to the Langa Voni Ceremony)</div>
-                </div>
-                <div class="gold-divider"></div>
-                <div class="details-wrapper">
-                    <div class="detail-badge">📅 Sunday, 17th May 2026</div>
-                    <div class="detail-badge">🕛 12:00 PM onwards</div>
-                    <div class="detail-badge">🏛️ Sontyam ZPHS Ground</div>
-                </div>
-                <div class="ritual-description" style="text-align: center;">
-                    💫 An evening of traditional Pasupu-Kunkuma, blessings, music, and cultural elegance.<br>
-                    Our daughter Bhavya Sri will adorn the Langa Voni for the first time, stepping gracefully into womanhood.<br>
-                    Please grace this milestone with your warm presence and blessings.
-                </div>
-                <div style="display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 10px 0;">
-                    <button id="mapTriggerEnglish" class="location-link">📍 Directions (from my location) →</button>
-                    <button class="btn-calendar" id="calendarEnglishBtn">📅 Add to Calendar</button>
-                </div>
-                <!-- Contact Info English -->
-                <div class="contact-row">
-                    <div class="contact-item">📞 Boddapu Govinda: <a href="tel:+919876543210">+91 98765 43210</a></div>
-                    <div class="contact-item">📧 <a href="mailto:boddapu.family@example.com">boddapu.family@example.com</a></div>
-                </div>
-                <div class="footer-blessing">
-                    🙏 Dinner & Reception will follow. We look forward to celebrating with you. 🙏
-                </div>
-            </div>
-        </div>
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-[#f8dd7f] text-4xl">temple_hindu</span>
+      <div>
+        <h2 class="font-serif text-3xl font-bold text-[#f8dd7f]">
+          <span class="lang-en">Half Saree</span>
+          <span class="lang-te">లంగా వోణి</span>
+        </h2>
+        <p class="text-[11px] tracking-[0.3em] uppercase text-white/70">
+          <span class="lang-en">Traditional Invitation</span>
+          <span class="lang-te">సాంప్రదాయ ఆహ్వానం</span>
+        </p>
+      </div>
     </div>
-    <!-- Footer with black text as per requirement -->
-    <div class="custom-footer">Boddapu Family | Traditional Langa Voni Invitation | Ritu Kala Samskaram | 17th May 2026</div>
+
+    <div class="hidden md:flex items-center gap-6 text-sm tracking-wide">
+      <a href="#about"    class="hover:text-[#f8dd7f] transition"><span class="lang-en">About</span><span class="lang-te">వివరాలు</span></a>
+      <a href="#event"    class="hover:text-[#f8dd7f] transition"><span class="lang-en">Ceremony</span><span class="lang-te">కార్యక్రమం</span></a>
+      <a href="#rituals"  class="hover:text-[#f8dd7f] transition"><span class="lang-en">Rituals</span><span class="lang-te">ఆచారాలు</span></a>
+      <a href="#venue"    class="hover:text-[#f8dd7f] transition"><span class="lang-en">Venue</span><span class="lang-te">వేదిక</span></a>
+      <a href="#blessings" class="hover:text-[#f8dd7f] transition"><span class="lang-en">Blessings</span><span class="lang-te">ఆశీస్సులు</span></a>
+
+      <div class="flex items-center bg-[#fff5e7] border border-[#f3d382] rounded-full p-1 shadow-2xl">
+        <button id="englishBtn" class="lang-switch-btn active-lang px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-300">English</button>
+        <button id="teluguBtn"  class="lang-switch-btn px-4 py-1.5 rounded-full text-sm font-semibold text-[#7a5200] transition-all duration-300">తెలుగు</button>
+      </div>
+    </div>
+
+    <!-- Mobile -->
+    <div class="flex md:hidden items-center gap-3">
+      <div class="flex items-center bg-[#fff5e7] border border-[#f3d382] rounded-full p-1 shadow-2xl">
+        <button id="englishBtnMobile" class="lang-switch-btn active-lang px-3 py-1 rounded-full text-xs font-semibold transition-all duration-300">EN</button>
+        <button id="teluguBtnMobile"  class="lang-switch-btn px-3 py-1 rounded-full text-xs font-semibold text-[#7a5200] transition-all duration-300">తె</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  <div id="heroParallax" class="absolute inset-0 scale-110 bg-cover bg-center"
+    style="background-image:
+      linear-gradient(rgba(0,0,0,0.45),rgba(35,18,7,0.38),rgba(0,0,0,0.72)),
+      url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_B76lFXlsmtMqLdDYZIn_oHimKsyh3oIFYPbB8cmcxtejN5JGnTuRHQJ7yF5of_GE_jtinNm-XZsuIDOxEGF44NovGeLmLxPMeqf_b7gYmKKocmHdolpwIM08kzHtlpGkw3Jfknjb52P890qoKKUKVqaYRbxuGc0scgNyvleitr3c-vSbhMeZRmEluUApcRl8u8O0HXdx2DbkStVBe9i1vGH16UhY1mwHok-xMYryIEkUI3bFen5J72ooc_YVcIPxIJrugbxpDVQ');">
+  </div>
+
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,120,0.18),transparent_60%)]"></div>
+
+  <!-- Top gold border -->
+  <div class="absolute top-0 left-0 w-full z-20">
+    <div class="h-2 bg-gradient-to-r from-[#7a5200] via-[#f4d06f] to-[#7a5200]"></div>
+  </div>
+
+  <!-- HERO CONTENT -->
+  <div class="relative z-20 w-full px-4 sm:px-6 text-center max-w-6xl mx-auto pt-28 pb-16" style="min-width:0;overflow:hidden;">
+
+    <!-- Shubhamastu -->
+    <div class="mb-4">
+      <p class="uppercase tracking-[0.4em] text-[#f8d57e] text-xs sm:text-sm mb-3">
+        <span class="lang-en">✦ SHUBHAMASTU ✦</span>
+        <span class="lang-te">✦ శుభమస్తు ✦</span>
+      </p>
+      <div class="flex items-center justify-center gap-3">
+        <div class="gold-line"></div>
+        <span class="material-symbols-outlined text-[#f8d57e] text-3xl sm:text-4xl">auto_awesome</span>
+        <div class="gold-line"></div>
+      </div>
+    </div>
+
+    <!-- Sanskrit shloka -->
+    <p class="shloka-text font-serif italic text-[#ffd4aa]/80 text-sm sm:text-xl mb-3 px-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)] leading-relaxed">
+      <span class="lang-en">🪷 "Subham Karoti Kalyanam Arogyam Dhana Sampadah" 🪷</span>
+      <span class="lang-te">🪷 "శుభం కరోతి కల్యాణం ఆరోగ్యం ధన సంపదః" 🪷</span>
+    </p>
+
+    <!-- Family invite line -->
+    <p class="font-serif italic text-[#ffd4aa] text-lg sm:text-3xl mb-6 px-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)]">
+      <span class="lang-en">Boddapu Family Cordially Invites You</span>
+      <span class="lang-te">బొడ్డాపు కుటుంబం మిమ్మల్ని మనఃపూర్వకంగా ఆహ్వానిస్తోంది</span>
+    </p>
+
+    <!-- NAME — clamp prevents overflow -->
+    <div class="space-y-0">
+      <h1 class="hero-title font-serif font-black leading-[0.88] tracking-tight text-[82px] md:text-[150px] lg:text-[190px] gold-gradient drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]" style="word-break:break-word;">BHAVYA</h1>
+      <h1 class="hero-title font-serif font-black leading-[0.88] tracking-tight text-[82px] md:text-[150px] lg:text-[190px] gold-gradient drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]" style="word-break:break-word;">SRI</h1>
+    </div>
+
+    <!-- Ceremony badge -->
+    <div class="mt-5 flex justify-center px-2">
+      <span class="ceremony-badge inline-block px-5 py-2 rounded-full border border-[#f8dd7f]/40 text-[#f8dd7f] text-xs sm:text-sm tracking-[0.25em] sm:tracking-[0.3em] uppercase font-semibold bg-white/5 backdrop-blur-sm leading-relaxed">
+        <span class="lang-en">Ritu Kala Samskara · Half Saree Ceremony</span>
+        <span class="lang-te">ఋతు కళా సంస్కారం · లంగా వోణి వేడుక</span>
+      </span>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="max-w-3xl mx-auto mt-6 px-1">
+      <p class="lang-en hero-desc text-white/95 text-sm sm:text-xl leading-[1.9] sm:leading-[2] tracking-wide drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]">
+        With divine blessings and boundless joy, we lovingly invite you to grace the sacred
+        <span class="text-[#f8d57e] font-semibold">Ritu Kala Samskara</span>
+        (Half Saree Ceremony) of our cherished daughter
+        <span class="text-[#f8d57e] font-semibold">Bhavya Sri.</span>
+        Your presence, blessings, and warm wishes will make this auspicious milestone truly unforgettable.
+      </p>
+      <p class="lang-te hero-desc text-white/95 text-sm sm:text-[22px] leading-[2] sm:leading-[2.2] tracking-wide font-medium drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]">
+        పరమేశ్వరుని అనుగ్రహంతో మరియు అపారమైన ఆనందంతో, మా ప్రియమైన కుమార్తె
+        <span class="text-[#f8d57e] font-semibold">భవ్య శ్రీ</span> యొక్క
+        <span class="text-[#f8d57e] font-semibold">ఋతు కళా సంస్కారం</span> (లంగా వోణి వేడుక)
+        శుభ సందర్భంగా మీ అమూల్యమైన సాన్నిధ్యాన్ని మనఃపూర్వకంగా కోరుతున్నాము.
+        మీ ఆశీర్వాదాలు ఈ శుభ కార్యానికి సంపూర్ణత చేకూరుస్తాయి.
+      </p>
+    </div>
+
+    <!-- EVENT INFO CARD — mobile stacks vertically -->
+    <div class="mt-8 flex justify-center px-1">
+      <div class="event-info-card glass premium-shadow rounded-[28px] px-6 py-5 sm:px-10 sm:py-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-0 sm:gap-6 border border-[#f3d38220] w-full sm:w-auto">
+
+        <div class="event-info-row sm:flex sm:items-center sm:gap-4">
+          <div class="event-info-icon w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#f3d38215] border border-[#f3d38235] flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#f8d57e] text-2xl sm:text-3xl">calendar_month</span>
+          </div>
+          <div class="text-left">
+            <p class="uppercase tracking-[0.25em] text-xs text-[#f8d57e]/80">
+              <span class="lang-en">Event Date</span><span class="lang-te">వేడుక తేదీ</span>
+            </p>
+            <p class="font-semibold text-white text-base sm:text-lg">
+              <span class="lang-en">Sunday, 17 May 2026</span><span class="lang-te">ఆదివారం, 17 మే 2026</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="hidden sm:block h-12 w-px bg-white/10"></div>
+
+        <div class="event-info-row sm:flex sm:items-center sm:gap-4">
+          <div class="event-info-icon w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#f3d38215] border border-[#f3d38235] flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#f8d57e] text-2xl sm:text-3xl">schedule</span>
+          </div>
+          <div class="text-left">
+            <p class="uppercase tracking-[0.25em] text-xs text-[#f8d57e]/80">
+              <span class="lang-en">Muhurtham</span><span class="lang-te">ముహూర్తం</span>
+            </p>
+            <p class="font-semibold text-white text-base sm:text-lg">10:30 AM</p>
+          </div>
+        </div>
+
+        <div class="hidden sm:block h-12 w-px bg-white/10"></div>
+
+        <div class="event-info-row sm:flex sm:items-center sm:gap-4">
+          <div class="event-info-icon w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#f3d38215] border border-[#f3d38235] flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#f8d57e] text-2xl sm:text-3xl">restaurant</span>
+          </div>
+          <div class="text-left">
+            <p class="uppercase tracking-[0.25em] text-xs text-[#f8d57e]/80">
+              <span class="lang-en">Lunch</span><span class="lang-te">భోజనం</span>
+            </p>
+            <p class="font-semibold text-white text-base sm:text-lg">12:00 PM</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COUNTDOWN — 2×2 grid on mobile -->
+    <div class="mt-8 px-1">
+      <p class="text-[#f8d57e]/70 text-xs uppercase tracking-[0.25em] mb-4">
+        <span class="lang-en">Counting down to the celebration</span>
+        <span class="lang-te">వేడుకకు లెక్కింపు</span>
+      </p>
+      <div class="countdown-wrap flex justify-center gap-3 sm:gap-4">
+        <div class="countdown-box">
+          <div id="cd-days"  class="cd-number font-serif text-4xl font-bold text-[#f8dd7f]">--</div>
+          <div class="text-xs text-white/60 mt-1 uppercase tracking-widest"><span class="lang-en">Days</span><span class="lang-te">రోజులు</span></div>
+        </div>
+        <div class="countdown-box">
+          <div id="cd-hours" class="cd-number font-serif text-4xl font-bold text-[#f8dd7f]">--</div>
+          <div class="text-xs text-white/60 mt-1 uppercase tracking-widest"><span class="lang-en">Hours</span><span class="lang-te">గంటలు</span></div>
+        </div>
+        <div class="countdown-box">
+          <div id="cd-mins"  class="cd-number font-serif text-4xl font-bold text-[#f8dd7f]">--</div>
+          <div class="text-xs text-white/60 mt-1 uppercase tracking-widest"><span class="lang-en">Mins</span><span class="lang-te">నిమిషాలు</span></div>
+        </div>
+        <div class="countdown-box">
+          <div id="cd-secs"  class="cd-number font-serif text-4xl font-bold text-[#f8dd7f]">--</div>
+          <div class="text-xs text-white/60 mt-1 uppercase tracking-widest"><span class="lang-en">Secs</span><span class="lang-te">సెకన్లు</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="mt-8 mb-6 flex flex-col sm:flex-row items-center justify-center gap-4 px-1">
+      <a href="#event" class="hero-btn btn-gold btn-hover w-full sm:w-auto px-7 py-4 rounded-full font-semibold text-black shadow-2xl flex items-center gap-3">
+        <span class="material-symbols-outlined">event</span>
+        <span class="lang-en">View Schedule</span>
+        <span class="lang-te">కార్యక్రమం చూడండి</span>
+      </a>
+      <a href="#venue" class="hero-btn btn-hover w-full sm:w-auto px-7 py-4 rounded-full font-semibold text-white shadow-2xl flex items-center gap-3 border border-white/30 bg-white/10 backdrop-blur-sm">
+        <span class="material-symbols-outlined">location_on</span>
+        <span class="lang-en">View Venue</span>
+        <span class="lang-te">వేదిక వివరాలు</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll bounce -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
+    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass flex items-center justify-center">
+      <span class="material-symbols-outlined text-[#f8d57e]">expand_more</span>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="py-16 sm:py-28 px-4 sm:px-6 bg-[#fbf6ee] silk-bg text-[#2a1b10]">
+  <div class="max-w-6xl mx-auto fade-up">
+    <div class="text-center mb-10 sm:mb-16">
+      <p class="uppercase tracking-[0.4em] text-[#b8860b] text-sm mb-5">
+        <span class="lang-en">Sacred Celebration</span>
+        <span class="lang-te">పవిత్ర వేడుక</span>
+      </p>
+      <h2 class="section-heading font-serif text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+        <span class="lang-en">Ritu Kala Samskara</span>
+        <span class="lang-te">ఋతు కళా సంస్కారం</span>
+      </h2>
+      <div class="gold-line mx-auto"></div>
+    </div>
+
+    <div class="about-card bg-white rounded-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-6 sm:p-10 md:p-16">
+      <div class="max-w-4xl mx-auto">
+        <p class="quote-text font-serif italic text-xl sm:text-2xl md:text-3xl leading-[1.9] text-[#5a4030] text-center mb-10 sm:mb-14">
+          <span class="lang-en">"As a lotus blossoms in divine grace, our beloved daughter steps into a radiant new chapter — adorned with tradition, embraced by love, and blessed by elders."</span>
+          <span class="lang-te">"తామరపువ్వు దైవ అనుగ్రహంతో వికసించినట్లే, మా ప్రియమైన కుమార్తె సంప్రదాయ సౌందర్యంతో, పెద్దల ఆశీర్వాదాలతో, కుటుంబ ప్రేమతో జీవితంలో నూతన అధ్యాయంలోకి అడుగుపెడుతోంది."</span>
+        </p>
+        <div class="about-inner-card bg-[#fdf8f0] border border-[#e8d9c0] rounded-3xl p-6 sm:p-8 mb-8 sm:mb-10 text-center">
+          <p class="uppercase tracking-[0.3em] text-sm text-[#b8860b] mb-4">
+            <span class="lang-en">About This Ceremony</span>
+            <span class="lang-te">ఈ వేడుక గురించి</span>
+          </p>
+          <p class="text-[#5a4030] text-base sm:text-lg leading-[1.9]">
+            <span class="lang-en">The <strong>Ritu Kala Samskara</strong>, known lovingly as <strong>Langa Voni</strong> in Telugu tradition, is one of the most sacred coming-of-age rituals in South Indian Hindu culture. This ceremony marks a girl's joyful transition from childhood to womanhood. Blessed by Vedic mantras, adorned with silk, gold, and flowers, and surrounded by the warmth of family — this milestone is celebrated with prayer, gratitude, and great festivity.</span>
+            <span class="lang-te"><strong>ఋతు కళా సంస్కారం</strong>, తెలుగు సంప్రదాయంలో <strong>లంగా వోణి</strong> అని ప్రేమగా పిలువబడే ఈ వేడుక, దక్షిణ భారత హిందూ సంస్కృతిలో అత్యంత పవిత్రమైన యుక్తవయస్సు ఆచారాలలో ఒకటి. ఈ వేడుక ఒక అమ్మాయి బాల్యం నుండి స్త్రీత్వంలోకి ఆనందంగా మారే శుభ సంఘటనను గుర్తిస్తుంది. వేద మంత్రాలతో ఆశీర్వదించబడి, పట్టు, బంగారం, పుష్పాలతో అలంకరించబడి, కుటుంబ ఆప్యాయతతో చుట్టుముట్టబడి — ఈ మైలురాయి ప్రార్థన, కృతజ్ఞత మరియు పెద్ద వేడుకతో జరుపబడుతుంది.</span>
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+  
+  <!-- Parents Section -->
+  <div class="text-center">
+    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#fdf3e7] border-2 border-[#d4af37] flex items-center justify-center mx-auto mb-4">
+      <span class="material-symbols-outlined text-[#b8860b] text-3xl">family_restroom</span>
+    </div>
+
+    <p class="uppercase tracking-[0.3em] text-sm text-[#b8860b] mb-3">
+      <span class="lang-en">Proud Parents</span>
+      <span class="lang-te">గర్వపడే తల్లిదండ్రులు</span>
+    </p>
+
+    <!-- English -->
+    <div class="lang-en">
+      <p class="font-serif text-xl sm:text-2xl text-[#5a4030] mt-2">Boddapu</p>
+      <h3 class="font-serif text-3xl sm:text-4xl font-bold text-[#2a1b10]">
+        Govinda Rao
+      </h3>
+      <p class="font-serif text-xl sm:text-2xl text-[#5a4030]">& Devi</p>
+    </div>
+
+    <!-- Telugu -->
+    <div class="lang-te">
+      <p class="font-serif text-xl sm:text-2xl text-[#5a4030] mt-2">బొడ్డపు</p>
+      <h3 class="font-serif text-3xl sm:text-4xl font-bold text-[#2a1b10]">
+        గోవిందరావు
+      </h3>
+      <p class="font-serif text-xl sm:text-2xl text-[#5a4030]">మరియు దేవి</p>
+    </div>
+  </div>
+
+  <!-- Blessings Section -->
+  <div class="text-center">
+    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#fdf3e7] border-2 border-[#d4af37] flex items-center justify-center mx-auto mb-4">
+      <span class="material-symbols-outlined text-[#b8860b] text-3xl">favorite</span>
+    </div>
+
+    <p class="uppercase tracking-[0.3em] text-sm text-[#b8860b] mb-3">
+      <span class="lang-en">With Blessings Of</span>
+      <span class="lang-te">పితామహుల ఆశీర్వాదాలతో</span>
+    </p>
+
+    <!-- English -->
+    <div class="lang-en">
+      <p class="font-serif text-xl sm:text-2xl text-[#5a4030] mt-2">Boddapu</p>
+      <h3 class="font-serif text-2xl sm:text-3xl font-bold text-[#2a1b10]">
+        Chinnaya (Late)
+      </h3>
+      <p class="font-serif text-xl sm:text-2xl text-[#5a4030]">
+        & Simhachalam
+      </p>
+    </div>
+
+    <!-- Telugu -->
+    <div class="lang-te">
+      <p class="font-serif text-xl sm:text-2xl text-[#5a4030] mt-2">బొడ్డపు</p>
+      <h3 class="font-serif text-2xl sm:text-3xl font-bold text-[#2a1b10]">
+        చిన్నయ్య (స్వర్గీయులు)
+      </h3>
+      <p class="font-serif text-xl sm:text-2xl text-[#5a4030]">
+        మరియు సింహాచలం
+      </p>
+    </div>
+  </div>
+
 </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- THREE.JS 3D Background (unchanged, temple style with scroll) -->
-<script type="importmap">
-    {
-        "imports": {
-            "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
-        }
+<!-- ========== EVENT DETAILS ========== -->
+<section id="event" class="py-16 sm:py-28 px-4 sm:px-6 bg-[#1b120d]">
+  <div class="max-w-6xl mx-auto fade-up">
+    <div class="text-center mb-16">
+      <p class="uppercase tracking-[0.4em] text-[#f8dd7f] text-sm mb-5">
+        <span class="lang-en">Ceremony Details</span>
+        <span class="lang-te">కార్యక్రమ వివరాలు</span>
+      </p>
+      <h2 class="section-heading font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+        <span class="lang-en">Event Timeline</span>
+        <span class="lang-te">కార్యక్రమ సమయపట్టిక</span>
+      </h2>
+      <div class="gold-line mx-auto"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- Schedule card -->
+      <div class="glass premium-shadow rounded-[35px] p-6 sm:p-10 timeline-card">
+        <div class="flex items-center gap-5 mb-8">
+          <div class="w-16 h-16 rounded-2xl bg-[#d4af3720] border border-[#d4af3760] flex items-center justify-center">
+            <span class="material-symbols-outlined text-[#f8dd7f] text-4xl">event</span>
+          </div>
+          <div>
+            <p class="uppercase tracking-[0.3em] text-xs text-[#f8dd7f]/70 mb-1">
+              <span class="lang-en">Ceremony Date</span>
+              <span class="lang-te">వేడుక తేదీ</span>
+            </p>
+            <h3 class="font-serif text-3xl text-white">
+              <span class="lang-en">Sunday, 17 May 2026</span>
+              <span class="lang-te">ఆదివారం, 17 మే 2026</span>
+            </h3>
+          </div>
+        </div>
+
+        <div class="space-y-5 text-white/90 leading-[2]">
+          <div class="flex gap-4 items-start">
+            <span class="material-symbols-outlined text-[#f8dd7f] mt-0.5">brightness_5</span>
+            <p><span class="font-semibold text-[#f8dd7f]">03:00 PM on 14th – </span>
+              <span class="lang-en">Guests arrival & Mangalasnaanam (Auspicious Bath)</span>
+              <span class="lang-te">అతిథుల రాక & మంగళస్నానం (శుభ స్నానం)</span>
+            </p>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="material-symbols-outlined text-[#f8dd7f] mt-0.5">auto_awesome</span>
+            <p><span class="font-semibold text-[#f8dd7f]">12:00 PM – </span>
+              <span class="lang-en">Auspicious Muhurtham — Langa Voni Ceremony begins</span>
+              <span class="lang-te">శుభ ముహూర్తం — లంగా వోణి వేడుక ప్రారంభం</span>
+            </p>
+          </div>
+          <!-- <div class="flex gap-4 items-start">
+            <span class="material-symbols-outlined text-[#f8dd7f] mt-0.5">temple_hindu</span>
+            <p>
+              <span class="lang-en">Vedic rituals, Ganapati Puja & Kanyadaan by Maternal Uncle</span>
+              <span class="lang-te">వేద ఆచారాలు, గణపతి పూజ & మేనమామ చేత కన్యాదానం</span>
+            </p>
+          </div> -->
+          <div class="flex gap-4 items-start">
+            <span class="material-symbols-outlined text-[#f8dd7f] mt-0.5">family_restroom</span>
+            <p>
+              <span class="lang-en">Elders' blessings, Gift of first saree from maternal uncle</span>
+              <span class="lang-te">పెద్దల ఆశీర్వాదాలు, మేనమామ చేత మొదటి చీర బహుమతి</span>
+            </p>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="material-symbols-outlined text-[#f8dd7f] mt-0.5">photo_camera</span>
+            <p>
+              <span class="lang-en">Family photo session on stage</span>
+              <span class="lang-te">వేదికపై కుటుంబ ఛాయాచిత్ర సెషన్</span>
+            </p>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="material-symbols-outlined text-[#f8dd7f] mt-0.5">restaurant</span>
+            <p><span class="font-semibold text-[#f8dd7f]">12:00 PM – </span>
+              <span class="lang-en">Grand Lunch & Fellowship for all guests</span>
+              <span class="lang-te">అందరికీ మహాభోజనం & సాంగత్యం</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Muhurtham card -->
+      <!-- <div class="muhurtham-card bg-gradient-to-br from-[#b8860b] to-[#d4af37] rounded-[35px] p-8 sm:p-10 text-center text-black premium-shadow flex flex-col justify-center">
+        <p class="uppercase tracking-[0.35em] text-sm mb-4">
+          <span class="lang-en">Auspicious Muhurtham</span>
+          <span class="lang-te">శుభ ముహూర్తం</span>
+        </p>
+        <h2 class="muhurtham-number font-serif text-7xl font-black mb-2">10:30</h2>
+        <p class="text-2xl font-semibold mb-6">
+          <span class="lang-en">AM Onwards</span>
+          <span class="lang-te">పూర్వాహ్ణం నుండి</span>
+        </p>
+        <div class="w-20 h-px bg-black/20 mx-auto mb-6"></div>
+        <p class="font-serif text-2xl leading-[1.9] mb-6">
+          <span class="lang-en">Punarvasu Nakshatra Yukta<br/>Mithuna Lagnam</span>
+          <span class="lang-te">పునర్వసు నక్షత్ర యుక్త<br/>మిథున లగ్నం</span>
+        </p>
+        <div class="w-20 h-px bg-black/20 mx-auto mb-6"></div>
+        <div class="bg-black/10 rounded-2xl p-4">
+          <p class="text-sm font-semibold mb-2 opacity-80">
+            <span class="lang-en">Tithi</span>
+            <span class="lang-te">తిథి</span>
+          </p>
+          <p class="font-serif text-xl font-bold">
+            <span class="lang-en">Vaishakha Shukla Dwadashi</span>
+            <span class="lang-te">వైశాఖ శుక్ల ద్వాదశి</span>
+          </p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<!-- ========== RITUALS SECTION ========== -->
+<section id="rituals" class="py-16 sm:py-28 px-4 sm:px-6 bg-[#fbf6ee] silk-bg text-[#2a1b10]">
+  <div class="max-w-6xl mx-auto fade-up">
+    <div class="text-center mb-16">
+      <p class="uppercase tracking-[0.4em] text-[#b8860b] text-sm mb-5">
+        <span class="lang-en">Sacred Traditions</span>
+        <span class="lang-te">పవిత్ర సంప్రదాయాలు</span>
+      </p>
+      <h2 class="font-serif text-5xl md:text-6xl font-bold mb-6">
+        <span class="lang-en">Ceremony Rituals</span>
+        <span class="lang-te">వేడుక ఆచారాలు</span>
+      </h2>
+      <div class="gold-line mx-auto"></div>
+      <p class="mt-6 text-[#5a4030] max-w-2xl mx-auto text-lg leading-relaxed">
+        <span class="lang-en">Every ritual in the Ritu Kala Samskara holds deep cultural and spiritual significance — woven together with love, prayer, and tradition.</span>
+        <span class="lang-te">ఋతు కళా సంస్కారంలోని ప్రతి ఆచారం లోతైన సాంస్కృతిక మరియు ఆధ్యాత్మిక ప్రాముఖ్యతను కలిగి ఉంటుంది — ప్రేమ, ప్రార్థన మరియు సంప్రదాయంతో అల్లుకుపోయింది.</span>
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Ritual 1 -->
+      <div class="bg-white rounded-3xl shadow-[0_5px_25px_rgba(0,0,0,0.06)] p-8 text-center hover:shadow-[0_10px_40px_rgba(184,134,11,0.12)] transition-shadow duration-300">
+        <div class="w-16 h-16 rounded-full bg-[#fdf3e7] border-2 border-[#d4af37] flex items-center justify-center mx-auto mb-5">
+          <span class="material-symbols-outlined text-[#b8860b] text-3xl">spa</span>
+        </div>
+        <h3 class="font-serif text-2xl font-bold mb-3">
+          <span class="lang-en">Mangalasnaanam</span>
+          <span class="lang-te">మంగళస్నానం</span>
+        </h3>
+        <p class="text-[#5a4030] leading-relaxed">
+          <span class="lang-en">The auspicious bath with turmeric, milk, and sacred herbs to purify and bless the girl at the start of the ceremony.</span>
+          <span class="lang-te">వేడుక ప్రారంభంలో అమ్మాయిని పవిత్రపరచి ఆశీర్వదించడానికి పసుపు, పాలు మరియు పవిత్ర మూలికలతో శుభ స్నానం.</span>
+        </p>
+      </div>
+      <!-- Ritual 2 -->
+      <!-- <div class="bg-white rounded-3xl shadow-[0_5px_25px_rgba(0,0,0,0.06)] p-8 text-center hover:shadow-[0_10px_40px_rgba(184,134,11,0.12)] transition-shadow duration-300">
+        <div class="w-16 h-16 rounded-full bg-[#fdf3e7] border-2 border-[#d4af37] flex items-center justify-center mx-auto mb-5">
+          <span class="material-symbols-outlined text-[#b8860b] text-3xl">temple_hindu</span>
+        </div>
+        <h3 class="font-serif text-2xl font-bold mb-3">
+          <span class="lang-en">Ganapati Puja</span>
+          <span class="lang-te">గణపతి పూజ</span>
+        </h3>
+        <p class="text-[#5a4030] leading-relaxed">
+          <span class="lang-en">Prayers to Lord Ganesha — the remover of obstacles — to seek divine blessings for a life filled with wisdom, prosperity, and happiness.</span>
+          <span class="lang-te">విఘ్నాలను తొలగించే వినాయకునికి ప్రార్థన — జ్ఞానం, సంపద మరియు ఆనందంతో నిండిన జీవితానికి దైవ ఆశీర్వాదాలు కోసం.</span>
+        </p>
+      </div> -->
+      <!-- Ritual 3 -->
+      <div class="bg-white rounded-3xl shadow-[0_5px_25px_rgba(0,0,0,0.06)] p-8 text-center hover:shadow-[0_10px_40px_rgba(184,134,11,0.12)] transition-shadow duration-300">
+        <div class="w-16 h-16 rounded-full bg-[#fdf3e7] border-2 border-[#d4af37] flex items-center justify-center mx-auto mb-5">
+          <span class="material-symbols-outlined text-[#b8860b] text-3xl">checkroom</span>
+        </div>
+        <h3 class="font-serif text-2xl font-bold mb-3">
+          <span class="lang-en">Langa Voni Dharana</span>
+          <span class="lang-te">లంగా వోణి ధారణ</span>
+        </h3>
+        <p class="text-[#5a4030] leading-relaxed">
+          <span class="lang-en">The ceremonial draping of the Half Saree (Langa Voni) — a silk skirt, blouse, and drape — marking her beautiful transition into womanhood.</span>
+          <span class="lang-te">లంగా వోణి (పట్టు పావడా, జాకెట్, ఓణి) ధారణ వేడుక — ఆమె స్త్రీత్వంలోకి అందమైన మారుటను సూచించే సంప్రదాయం.</span>
+        </p>
+      </div>
+      <!-- Ritual 4 -->
+      <div class="bg-white rounded-3xl shadow-[0_5px_25px_rgba(0,0,0,0.06)] p-8 text-center hover:shadow-[0_10px_40px_rgba(184,134,11,0.12)] transition-shadow duration-300">
+        <div class="w-16 h-16 rounded-full bg-[#fdf3e7] border-2 border-[#d4af37] flex items-center justify-center mx-auto mb-5">
+          <span class="material-symbols-outlined text-[#b8860b] text-3xl">volunteer_activism</span>
+        </div>
+        <h3 class="font-serif text-2xl font-bold mb-3">
+          <span class="lang-en">Maternal Uncle's Gift</span>
+          <span class="lang-te">మేనమామ బహుమతి</span>
+        </h3>
+        <p class="text-[#5a4030] leading-relaxed">
+          <span class="lang-en">The maternal uncle presents the girl's first silk saree — a cherished tradition symbolising love, protection, and life-long family bond.</span>
+          <span class="lang-te">మేనమామ అమ్మాయికి మొదటి పట్టు చీర బహుమతిగా ఇస్తారు — ప్రేమ, రక్షణ మరియు జీవితకాల కుటుంబ బంధాన్ని సూచించే ప్రేమపూర్వక సంప్రదాయం.</span>
+        </p>
+      </div>
+      <!-- Ritual 5 -->
+      <div class="bg-white rounded-3xl shadow-[0_5px_25px_rgba(0,0,0,0.06)] p-8 text-center hover:shadow-[0_10px_40px_rgba(184,134,11,0.12)] transition-shadow duration-300">
+        <div class="w-16 h-16 rounded-full bg-[#fdf3e7] border-2 border-[#d4af37] flex items-center justify-center mx-auto mb-5">
+          <span class="material-symbols-outlined text-[#b8860b] text-3xl">stars</span>
+        </div>
+        <h3 class="font-serif text-2xl font-bold mb-3">
+          <span class="lang-en">Elders' Blessings</span>
+          <span class="lang-te">పెద్దల ఆశీర్వాదాలు</span>
+        </h3>
+        <p class="text-[#5a4030] leading-relaxed">
+          <span class="lang-en">Grandparents, relatives, and elders bless the girl with wishes of health, wisdom, happiness, and a bright future ahead.</span>
+          <span class="lang-te">తాతయ్యలు, బంధువులు మరియు పెద్దలు ఆరోగ్యం, జ్ఞానం, సంతోషం మరియు ప్రకాశమానమైన భవిష్యత్తు కోసం అమ్మాయికి ఆశీర్వదిస్తారు.</span>
+        </p>
+      </div>
+      <!-- Ritual 6 -->
+      <div class="bg-white rounded-3xl shadow-[0_5px_25px_rgba(0,0,0,0.06)] p-8 text-center hover:shadow-[0_10px_40px_rgba(184,134,11,0.12)] transition-shadow duration-300">
+        <div class="w-16 h-16 rounded-full bg-[#fdf3e7] border-2 border-[#d4af37] flex items-center justify-center mx-auto mb-5">
+          <span class="material-symbols-outlined text-[#b8860b] text-3xl">restaurant</span>
+        </div>
+        <h3 class="font-serif text-2xl font-bold mb-3">
+          <span class="lang-en">Grand Feast</span>
+          <span class="lang-te">మహాభోజనం</span>
+        </h3>
+        <p class="text-[#5a4030] leading-relaxed">
+          <span class="lang-en">A lavish traditional Andhra lunch served to all guests — an expression of gratitude, love, and heartfelt hospitality from the family.</span>
+          <span class="lang-te">అన్ని అతిథులకు అందించే సమృద్ధమైన సాంప్రదాయ ఆంధ్ర భోజనం — కుటుంబం నుండి కృతజ్ఞత, ప్రేమ మరియు ఆతిథ్య భావం వ్యక్తీకరణ.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== VENUE ========== -->
+<section id="venue" class="py-28 px-6 bg-[#1b120d]">
+  <div class="max-w-7xl mx-auto fade-up">
+    <div class="text-center mb-16">
+      <p class="uppercase tracking-[0.4em] text-[#f8dd7f] text-sm mb-5">
+        <span class="lang-en">Venue</span>
+        <span class="lang-te">వేదిక</span>
+      </p>
+      <h2 class="font-serif text-5xl md:text-6xl font-bold text-white mb-6">
+        <span class="lang-en">Event Location</span>
+        <span class="lang-te">కార్యక్రమ స్థలం</span>
+      </h2>
+      <div class="gold-line mx-auto"></div>
+    </div>
+
+    <div class="overflow-hidden rounded-[40px] bg-[#231710] shadow-[0_10px_40px_rgba(0,0,0,0.3)] grid lg:grid-cols-2">
+      <div class="min-h-[400px]">
+        <iframe class="w-full h-full" src="https://maps.google.com/maps?q=17.865722,83.291389&z=17&output=embed" loading="lazy"></iframe>
+      </div>
+      <div class="p-10 md:p-14 flex flex-col justify-center">
+        <p class="uppercase tracking-[0.3em] text-sm text-[#f8dd7f]/70 mb-4">
+          <span class="lang-en">Exact Venue</span>
+          <span class="lang-te">వేడుక జరుగు స్థలం</span>
+        </p>
+        <h3 class="font-serif text-4xl font-bold text-white mb-3">ZPH School Ground</h3>
+        <p class="text-xl text-white/70 leading-[1.9] mb-6">
+          <span class="lang-en">Sontyam, Visakhapatnam,<br/>Andhra Pradesh</span>
+          <span class="lang-te">సొంట్యాం, విశాఖపట్నం,<br/>ఆంధ్రప్రదేశ్</span>
+        </p>
+
+        <!-- Details -->
+        <div class="space-y-4 mb-8">
+          <div class="flex items-center gap-3 text-white/80">
+            <span class="material-symbols-outlined text-[#f8dd7f]">calendar_month</span>
+            <span>
+              <span class="lang-en">Sunday, 17 May 2026</span>
+              <span class="lang-te">ఆదివారం, 17 మే 2026</span>
+            </span>
+          </div>
+          <div class="flex items-center gap-3 text-white/80">
+            <span class="material-symbols-outlined text-[#f8dd7f]">schedule</span>
+            <span>
+              <span class="lang-en">10:30 AM — Muhurtham | 12:00 PM — Lunch</span>
+              <span class="lang-te">పూ. 10:30 — ముహూర్తం | మ. 12:00 — భోజనం</span>
+            </span>
+          </div>
+          <div class="flex items-center gap-3 text-white/80">
+            <span class="material-symbols-outlined text-[#f8dd7f]">my_location</span>
+            <span class="font-mono text-sm">17°51'56.6"N 83°17'29.0"E</span>
+          </div>
+        </div>
+
+        <a href="https://maps.google.com/?q=17.865722,83.291389" target="_blank"
+          class="w-fit btn-red btn-hover text-white px-8 py-4 rounded-full font-semibold shadow-xl flex items-center gap-3">
+          <span class="material-symbols-outlined">directions</span>
+          <span class="lang-en">Open in Google Maps</span>
+          <span class="lang-te">గూగుల్ మ్యాప్స్‌లో తెరవండి</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BLESSINGS ========== -->
+<section id="blessings" class="py-24 px-6 bg-gradient-to-br from-[#b22b1d] to-[#7c1f14]">
+  <div class="max-w-5xl mx-auto text-center fade-up">
+    <span class="material-symbols-outlined text-7xl text-[#ffd89c]/40 mb-6 block">favorite</span>
+    <p class="uppercase tracking-[0.4em] text-[#ffd4aa]/70 text-xs mb-4">
+      <span class="lang-en">A Message From Our Hearts</span>
+      <span class="lang-te">మన హృదయాల నుండి ఒక మాట</span>
+    </p>
+    <h2 class="font-serif text-5xl md:text-6xl font-bold mb-8">
+      <span class="lang-en">A Humble Note</span>
+      <span class="lang-te">వినమ్ర నివేదన</span>
+    </h2>
+    <p class="font-serif italic text-2xl md:text-3xl leading-[2] text-white/95 mb-10">
+      <span class="lang-en">"Your gracious presence and heartfelt blessings are the greatest gifts for Bhavya Sri on this sacred day. We lovingly request that you bring only your smiles, blessings, and warmth — for your love means everything to us."</span>
+      <span class="lang-te">"ఈ పవిత్ర దినాన మీ సాన్నిధ్యం మరియు హృదయపూర్వక ఆశీస్సులే భవ్య శ్రీకి అత్యుత్తమ బహుమానాలు. మీరు కేవలం మీ చిరునవ్వులు, ఆశీర్వాదాలు మరియు ఆప్యాయతను తీసుకొని రావాలని మనఃపూర్వకంగా కోరుతున్నాము — మీ ప్రేమ మాకు సర్వస్వం."</span>
+    </p>
+    <!-- No-gift note -->
+    <!-- <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3">
+      <span class="material-symbols-outlined text-[#ffd4aa]">card_giftcard</span>
+      <span class="text-white/90 text-sm font-medium">
+        <span class="lang-en">We kindly request: No physical gifts please 🙏</span>
+        <span class="lang-te">దయచేసి గమనించండి: భౌతిక బహుమతులు వద్దు 🙏</span>
+      </span>
+    </div> -->
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-[#120b07] py-14 text-center">
+  <span class="material-symbols-outlined text-[#d4af37]/50 text-5xl mb-4 block">temple_hindu</span>
+  <h3 class="font-serif text-4xl text-[#f8dd7f] mb-3">
+    <span class="lang-en">Boddapu Family</span>
+    <span class="lang-te">బొడ్డాపు కుటుంబం</span>
+  </h3>
+  <p class="text-white/60 tracking-wide mb-2">
+    <span class="lang-en">With Love, Tradition & Divine Blessings</span>
+    <span class="lang-te">ప్రేమ, సంప్రదాయం & దైవ ఆశీర్వాదాలతో</span>
+  </p>
+  <p class="text-white/40 text-sm mb-6">
+    <span class="lang-en">Sontyam, Visakhapatnam · Sunday, 17 May 2026</span>
+    <span class="lang-te">సొంట్యాం, విశాఖపట్నం · ఆదివారం, 17 మే 2026</span>
+  </p>
+  <div class="w-20 h-px bg-[#d4af37]/40 mx-auto my-6"></div>
+  <p class="text-sm text-white/40">
+    <span class="lang-en">© 2026 Ritu Kala Samskara Invitation · Bhavya Sri</span>
+    <span class="lang-te">© 2026 ఋతు కళా సంస్కారం ఆహ్వానం · భవ్య శ్రీ</span>
+  </p>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+
+<!-- Countdown -->
+<script>
+  function updateCountdown() {
+    const target = new Date('2026-05-17T10:30:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      document.getElementById('cd-secs').textContent = '0';
+      return;
     }
+    const days  = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const mins  = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const secs  = Math.floor((diff % (1000*60)) / 1000);
+    document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 </script>
 
-<script type="module">
-    import * as THREE from 'three';
-    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-    
-    const container = document.getElementById('canvas-container');
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x160a05);
-    scene.fog = new THREE.FogExp2(0x2f1c0e, 0.009);
-    
-    const camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 1.3, 7);
-    camera.lookAt(0, 0.6, 0);
-    
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.toneMapping = THREE.ReinhardToneMapping;
-    renderer.toneMappingExposure = 1.25;
-    container.appendChild(renderer.domElement);
-    
-    const renderScene = new RenderPass(scene, camera);
-    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.1, 0.35, 0.8);
-    bloomPass.threshold = 0.15;
-    bloomPass.strength = 0.7;
-    bloomPass.radius = 0.55;
-    const effectComposer = new EffectComposer(renderer);
-    effectComposer.addPass(renderScene);
-    effectComposer.addPass(bloomPass);
-    
-    // Lighting
-    const ambient = new THREE.AmbientLight(0x432b17, 0.65);
-    scene.add(ambient);
-    const mainDir = new THREE.DirectionalLight(0xffd191, 1.3);
-    mainDir.position.set(2, 4, 3);
-    scene.add(mainDir);
-    const fillPoint = new THREE.PointLight(0xb5682b, 0.85);
-    fillPoint.position.set(-2, 1.8, 3.2);
-    scene.add(fillPoint);
-    const goldBack = new THREE.PointLight(0xde9536, 0.7);
-    goldBack.position.set(0, 1.5, -4);
-    scene.add(goldBack);
-    const rimLight = new THREE.PointLight(0xffaf5e, 0.9);
-    rimLight.position.set(2, 2, 2.5);
-    scene.add(rimLight);
-    
-    // Ornaments
-    const knotGeo = new THREE.TorusKnotGeometry(1.15, 0.1, 200, 24, 3, 4);
-    const goldMat = new THREE.MeshStandardMaterial({ color: 0xe0aa55, emissive: 0x7a3c14, emissiveIntensity: 0.38, metalness: 0.85, roughness: 0.3 });
-    const knot = new THREE.Mesh(knotGeo, goldMat);
-    knot.position.y = 0.45;
-    scene.add(knot);
-    
-    const outerRingGeo = new THREE.TorusGeometry(1.7, 0.07, 128, 260);
-    const bronzeMat = new THREE.MeshStandardMaterial({ color: 0xbb8742, metalness: 0.6 });
-    const outerRing = new THREE.Mesh(outerRingGeo, bronzeMat);
-    outerRing.rotation.x = Math.PI / 2;
-    outerRing.position.y = 0.2;
-    scene.add(outerRing);
-    
-    const gemGroup = [];
-    const gemMat = new THREE.MeshStandardMaterial({ color: 0xffae54, emissive: 0xcc6633, emissiveIntensity: 0.45 });
-    for (let i = 0; i < 32; i++) {
-        const gem = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), gemMat);
-        const radius = 2.05;
-        const angle = (i / 32) * Math.PI * 2;
-        gem.position.set(Math.cos(angle) * radius, 0.48 + Math.sin(angle*3)*0.1, Math.sin(angle) * radius);
-        scene.add(gem);
-        gemGroup.push(gem);
-    }
-    
-    const particleCount = 2000;
-    const particleGeo = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount; i++) {
-        positions[i*3] = (Math.random() - 0.5) * 14;
-        positions[i*3+1] = (Math.random() - 0.5) * 6 + 1;
-        positions[i*3+2] = (Math.random() - 0.5) * 9 - 3;
-        const goldness = Math.random() > 0.7 ? [1, 0.65, 0.25] : [0.95, 0.7, 0.3];
-        colors[i*3] = goldness[0];
-        colors[i*3+1] = goldness[1];
-        colors[i*3+2] = goldness[2];
-    }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    const particleMaterial = new THREE.PointsMaterial({ size: 0.055, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending });
-    const particleSys = new THREE.Points(particleGeo, particleMaterial);
-    scene.add(particleSys);
-    
-    const starGeo = new THREE.BufferGeometry();
-    const starPos = [];
-    for (let i = 0; i < 1200; i++) {
-        starPos.push((Math.random() - 0.5) * 40);
-        starPos.push((Math.random() - 0.5) * 18);
-        starPos.push((Math.random() - 0.5) * 20 - 10);
-    }
-    starGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(starPos), 3));
-    const starMat = new THREE.PointsMaterial({ color: 0xfad37b, size: 0.045, transparent: true, blending: THREE.AdditiveBlending });
-    const stars = new THREE.Points(starGeo, starMat);
-    scene.add(stars);
-    
-    let scrollPercent = 0;
-    let targetCameraZ = 7;
-    let targetY = 1.3;
-    let targetBloomStrength = 0.7;
-    
-    function updateScroll() {
-        const scrolled = window.scrollY;
-        const maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
-        scrollPercent = Math.min(1, Math.max(0, scrolled / maxScroll));
-        targetCameraZ = 7 - (scrollPercent * 1.9);
-        targetY = 1.3 + (scrollPercent * 0.7);
-        targetBloomStrength = 0.7 + scrollPercent * 0.5;
-        knot.material.emissiveIntensity = 0.38 + scrollPercent * 0.55;
-        gemMat.emissiveIntensity = 0.45 + scrollPercent * 0.65;
-        bloomPass.strength = targetBloomStrength;
-        scene.fog.density = 0.009 + scrollPercent * 0.009;
-    }
-    
-    window.addEventListener('scroll', updateScroll);
-    updateScroll();
-    
-    let currentCamZ = 7, currentCamY = 1.3;
-    let time = 0;
-    
-    function animate() {
-        requestAnimationFrame(animate);
-        time += 0.012;
-        
-        currentCamZ += (targetCameraZ - currentCamZ) * 0.09;
-        currentCamY += (targetY - currentCamY) * 0.09;
-        camera.position.z = currentCamZ;
-        camera.position.y = currentCamY;
-        camera.lookAt(0, 0.8 + scrollPercent * 0.5, 0);
-        
-        knot.rotation.y = time * 0.2;
-        knot.rotation.x = Math.sin(time * 0.45) * 0.12;
-        outerRing.rotation.z += 0.003;
-        outerRing.rotation.x = Math.PI / 2 + Math.sin(time * 0.3) * 0.05;
-        
-        gemGroup.forEach((g, idx) => {
-            g.position.y = 0.48 + Math.sin(time * 1.6 + idx) * 0.06;
-        });
-        
-        particleSys.rotation.y += 0.0006;
-        stars.rotation.x = Math.sin(time * 0.05) * 0.02;
-        effectComposer.render();
-    }
-    animate();
-    
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        effectComposer.setSize(window.innerWidth, window.innerHeight);
-    });
-    
-    // ========== Bilingual Toggle & Maps with User Directions ==========
-    const teluguDiv = document.getElementById('teluguLangBlock');
-    const englishDiv = document.getElementById('englishLangBlock');
-    const teluguBtn = document.getElementById('teluguBtn');
-    const englishBtn = document.getElementById('englishBtn');
-    
-    teluguDiv.style.display = 'block';
-    englishDiv.style.display = 'none';
-    
-    function setLanguage(teluguActive) {
-        if (teluguActive) {
-            teluguDiv.style.display = 'block';
-            englishDiv.style.display = 'none';
-            teluguBtn.classList.add('active');
-            englishBtn.classList.remove('active');
-        } else {
-            teluguDiv.style.display = 'none';
-            englishDiv.style.display = 'block';
-            englishBtn.classList.add('active');
-            teluguBtn.classList.remove('active');
-        }
-    }
-    
-    teluguBtn.addEventListener('click', () => setLanguage(true));
-    englishBtn.addEventListener('click', () => setLanguage(false));
-    
-    // Directions from user's current location to the venue (encoded address)
-    // Venue address: Sontyam ZPHS Ground, we'll use Google Maps 'saddr' param with current position.
-    const venueAddress = "Sontyam ZPHS Ground, Sontyam, Andhra Pradesh, India";  // accurate for directions
-    function openDirectionsFromCurrent() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const userLat = position.coords.latitude;
-                    const userLng = position.coords.longitude;
-                    const mapsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${encodeURIComponent(venueAddress)}`;
-                    window.open(mapsUrl, '_blank');
-                },
-                (error) => {
-                    // Fallback: if geolocation fails or denied, just open map with venue location.
-                    const fallbackUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueAddress)}`;
-                    window.open(fallbackUrl, '_blank');
-                    alert("Location access denied or unavailable. Opening venue location on map.");
-                }
-            );
-        } else {
-            const fallbackUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueAddress)}`;
-            window.open(fallbackUrl, '_blank');
-            alert("Geolocation not supported. Opening venue location.");
-        }
-    }
-    
-    document.getElementById('mapTriggerTelugu')?.addEventListener('click', openDirectionsFromCurrent);
-    document.getElementById('mapTriggerEnglish')?.addEventListener('click', openDirectionsFromCurrent);
-    
-    // Calendar function
-    function addToCalendar() {
-        const startDate = '20260517T120000';
-        const endDate = '20260517T160000';
-        const title = encodeURIComponent('Half Saree Ceremony - Bhavya Sri');
-        const details = encodeURIComponent('Ritu Kala Samskaram: Celebration of Bhavya Sri\'s Langa Voni Ceremony. Join Boddapu Family for blessings and traditional festivities.');
-        const location = encodeURIComponent('Sontyam ZPHS Ground, Sontyam');
-        const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
-        window.open(url, '_blank');
-    }
-    
-    document.getElementById('calendarTeluguBtn')?.addEventListener('click', addToCalendar);
-    document.getElementById('calendarEnglishBtn')?.addEventListener('click', addToCalendar);
-    
-    // subtle confetti
-    setTimeout(() => {
-        import('https://cdn.jsdelivr.net/npm/canvas-confetti@1').then(module => {
-            module.default({ particleCount: 100, spread: 70, origin: { y: 0.65 }, colors: ['#f0bc6e', '#dfa345', '#c2722a'] });
-        });
-    }, 400);
+<!-- Language Toggle -->
+<script>
+  const englishBtn       = document.getElementById('englishBtn');
+  const teluguBtn        = document.getElementById('teluguBtn');
+  const englishBtnMobile = document.getElementById('englishBtnMobile');
+  const teluguBtnMobile  = document.getElementById('teluguBtnMobile');
+
+  function showEnglish() {
+    document.body.classList.remove('lang-telugu');
+    document.body.classList.add('lang-english');
+    [englishBtn, englishBtnMobile].forEach(b => b && b.classList.add('active-lang'));
+    [teluguBtn,  teluguBtnMobile ].forEach(b => b && b.classList.remove('active-lang'));
+    document.documentElement.lang = 'en';
+  }
+
+  function showTelugu() {
+    document.body.classList.remove('lang-english');
+    document.body.classList.add('lang-telugu');
+    [teluguBtn,  teluguBtnMobile ].forEach(b => b && b.classList.add('active-lang'));
+    [englishBtn, englishBtnMobile].forEach(b => b && b.classList.remove('active-lang'));
+    document.documentElement.lang = 'te';
+  }
+
+  /* Default = English */
+  showEnglish();
+
+  englishBtn?.addEventListener('click', showEnglish);
+  teluguBtn?.addEventListener('click', showTelugu);
+  englishBtnMobile?.addEventListener('click', showEnglish);
+  teluguBtnMobile?.addEventListener('click', showTelugu);
 </script>
+
+<!-- Fade-up observer & Parallax -->
+<script>
+  const faders = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.12 });
+  faders.forEach(el => observer.observe(el));
+
+  const hero = document.getElementById('heroParallax');
+  window.addEventListener('scroll', () => {
+    if (hero) hero.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.1)`;
+  });
+</script>
+
 </body>
 </html>
